@@ -1,0 +1,36 @@
+{
+	"name": "Prince PDF",
+	"version": "0.1",
+	"author": ["Yaron Koren", "Taylor Dondich", "Nad"],
+	"url": "https://www.mediawiki.org/wiki/Extension:Prince_PDF",
+	"descriptionmsg": "princepdf-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "specialpage",
+	"requires": {
+		"MediaWiki": ">= 1.25.3"
+	},
+	"SpecialPages": {
+		"PrincePDF": "PrincePDF"
+	},
+	"MessagesDirs": {
+		"PrincePDF": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"PrincePDF": "PrincePDFSpecial.php",
+		"Prince": "Prince/prince.php"
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "PrincePDF"
+	},
+	"config": {
+		"PrincePDFDirectory": null,
+		"PrincePDFPath": null,
+		"PrincePDFCSSFile": null,
+		"PrincePDFJSFile": null,
+		"PrinceImagePath": null
+	},
+	"manifest_version": 1
+}

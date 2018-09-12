@@ -1,0 +1,14 @@
+== About ==
+
+Prince PDF is an extension to MediaWiki that generates PDF files
+based on wiki pages, using the Prince application.
+
+For more information, see the extension homepage at:
+https://www.mediawiki.org/wiki/Extension:Prince_PDF
+
+== Credits ==
+
+Prince PDF was written by Yaron Koren. It is based in large part
+on the PonyDocsPdfBook extension, written by Taylor Dondich and
+Nad. It also includes the Prince PHP interface, created by the
+developers at YesLogic.

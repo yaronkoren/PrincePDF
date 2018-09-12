@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Yaron Koren"
+		]
+	},
+	"princepdf-desc": "Exports PDF using the Prince software",
+	"princepdf": "Prince PDF"
+}
