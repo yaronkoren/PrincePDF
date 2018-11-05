@@ -52,7 +52,11 @@ class PrincePDF extends SpecialPage {
 					if ( is_string( $tocLine[0] ) ) {
 						continue;
 					}
-					$titles[] = array( $tocLine[0]->getTitle(), $tocLine[0]->getDisplayName() );
+					$curTitle = $tocLine[0]->getTitle();
+					if ( !$curTitle->exists() ) {
+						continue;
+					}
+					$titles[] = array( $curTitle, $tocLine[0]->getDisplayName() );
 				}
 			}
 		}
