@@ -7,7 +7,7 @@ class PrincePDF extends SpecialPage {
 	}
 
 	function execute( $query ) {
-		global $wgPrincePDFDirectory;
+		global $wgPrincePDFDirectory, $wgRequest;
 
 		$this->setHeaders();
 		if ( $query == null ) {
@@ -44,19 +44,21 @@ class PrincePDF extends SpecialPage {
 				$documentTitle = $mdPage->getManual()->getDisplayName();
 				$documentSubtitle = $mdPage->getDisplayName();
 			} elseif ( $mdType == 'Manual' ) {
-				$isManual = true;
 				$documentTitle = $mdPage->getDisplayName();
 				$documentSubtitle = '';
-				$tocArray = $mdPage->getTableOfContentsArray( true );
-				foreach ( $tocArray as $tocLine ) {
-					if ( is_string( $tocLine[0] ) ) {
-						continue;
+				if ( ! $wgRequest->getCheck( 'single' ) ) {
+					$isManual = true;
+					$tocArray = $mdPage->getTableOfContentsArray( true );
+					foreach ( $tocArray as $tocLine ) {
+						if ( is_string( $tocLine[0] ) ) {
+							continue;
+						}
+						$curTitle = $tocLine[0]->getTitle();
+						if ( !$curTitle->exists() ) {
+							continue;
+						}
+						$titles[] = array( $curTitle, $tocLine[0]->getDisplayName() );
 					}
-					$curTitle = $tocLine[0]->getTitle();
-					if ( !$curTitle->exists() ) {
-						continue;
-					}
-					$titles[] = array( $curTitle, $tocLine[0]->getDisplayName() );
 				}
 			}
 		}
