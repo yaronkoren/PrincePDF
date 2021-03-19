@@ -28,6 +28,12 @@ class PrincePDF extends SpecialPage {
 		$tmpFile = $wgPrincePDFDirectory . uniqid('tmpPdfHeader') . '.html';
 
 		$thisTitle = Title::newFromText( $pageName );
+               // error handling: ensure page exists before continuing
+               $wikiPageCheck = WikiPage::factory( $thisTitle );
+               if (empty($wikiPageCheck->getContent())) {
+                       $out->addWikiText("'Error:' Specified target page for PDF creation does not exist.");
+                       return;
+               }
 
 		$documentTitle = $pageName;
 		$documentSubtitle = '';
@@ -40,6 +46,11 @@ class PrincePDF extends SpecialPage {
 		if ( class_exists( 'MintyDocsUtils' ) ) {
 			$mdPage = MintyDocsUtils::pageFactory( $thisTitle );
 			$mdType = $mdPage->getPageTypeValue();
+                       // error handling: ensure user has permission to view the target MintyDocs content
+                       if (!$mdPage->userCanView($out->getUser())) {
+                               $out->addWikiText("'Error:' You aren't able to generate PDF versions of this content. Please ensure you are logged in and try again.");
+                               return;
+                       }
 			if ( $mdType == 'Topic' ) {
 				$documentTitle = $mdPage->getManual()->getDisplayName();
 				$documentSubtitle = $mdPage->getDisplayName();
